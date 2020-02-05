@@ -34,9 +34,20 @@ git clone Link-Here
 ```
 
 4. navigate to the new folder that was created on your desk
-5. select index.html
-6. right click on the file and select _'open with'_
-7. select your browser
+```sh
+cd folder name
+```
+
+5. run npm install
+```sh
+npm install
+```
+6. run development server
+```sh
+npm run start
+```
+
+7. edit files in '/src' to make changes to the project.
 8. enjoy this project
 
 
