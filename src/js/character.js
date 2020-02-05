@@ -59,7 +59,6 @@ export class Character {
     } else {
       if(that.getUser() === 'user1'){
         that.taken.push(listOfGirls[userPick].name);
-        console.log(that.taken);
         that.user1 = listOfGirls[userPick];
       } else if (that.getUser() === 'user2') {
         that.user2 = listOfGirls[userPick];

@@ -2,15 +2,22 @@ export class Battle {
     constructor(character, inventory) {
         this.state = 0;
         this.character = character;
-        this.invetory = inventory
+        this.inventory = inventory
         
     }
 
-    updateInventory(action){
+    updateInventory(action, testItem){
         let that = this;
         if (action === "hold") {
             that.character.user1.hp +=5;
             return "hold"
+        } else if (action === "draw"){
+            if(testItem){
+                that.inventory.items[testItem].id = that.character.getUser();
+                return that.inventory.items[testItem].id;
+            }
+        } else {
+            return "Error on draw"
         }
         //check action.
         //if hold do nothing

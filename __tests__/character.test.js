@@ -59,6 +59,4 @@ describe('pick golden girl', () => {
     expect(character.user2).toEqual(sophia);
   })
 
-
-
 })

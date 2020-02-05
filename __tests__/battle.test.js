@@ -15,12 +15,19 @@ describe('update inventory', () => {
   var inventory = new Inventory();
   var character = new Character();
   var battle = new Battle(character, inventory);
+
   test('should return hold', () => {
     expect(battle.updateInventory("hold")).toEqual("hold")
   });
+
   test('should return user1s health increased by 5 hp',() => {
     character.user1 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 35, magic: 10, img: '' }
     battle.updateInventory("hold");
     expect(character.user1.hp).toEqual(70);
-  })
+  });
+
+  test('should add user1 to a random items id in inventory', () => {
+    battle.updateInventory('draw', 1);
+    expect(inventory.items[1].id).toEqual('user1');
+  });
 });
