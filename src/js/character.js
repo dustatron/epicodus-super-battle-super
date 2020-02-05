@@ -52,11 +52,23 @@ export class Character {
     //add golden girl object to currentUser object.
     //add golden girl to taken array.
     //run advanceTurn()
-    
 
-    this.user1 = listOfGirls[userPick];
-    this.taken.push(listOfGirls[userPick].name);
-
+    let that = this;
+    if (this.taken.includes(listOfGirls[userPick].name)) {
+      return "This Golden Girl has been taken"
+    } else {
+      if(that.getUser() === 'user1'){
+        that.taken.push(listOfGirls[userPick].name);
+        console.log(that.taken);
+        that.user1 = listOfGirls[userPick];
+      } else if (that.getUser() === 'user2') {
+        that.user2 = listOfGirls[userPick];
+        that.taken.push(listOfGirls[userPick].name);
+      } else {
+        return 'Error: on writing to user object';
+      }
+      that.advanceTurn();
+    }
 
   };
 

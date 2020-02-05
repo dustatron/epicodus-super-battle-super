@@ -33,26 +33,32 @@ describe('advance turn', () => {
 describe('pick golden girl', () => {
   let character = new Character();
 
-  beforeEach(() => {
-    character = new Character();
-  });
-
   test('should place blanche object in charater.user1', () => {
     character.pickGoldenGirl(0);
     var blanche = { id: 0, name: "Blanche Devereaux", hp: 65, armor: 35, magic: 10, img: '' }
     expect(character.user1).toEqual(blanche);
   });
 
+  test('should check this.taken array to make sure the user selected golden girl hasnt already been selected', () => {
+
+    character.taken = ["Blanche Devereaux"];
+    expect(character.pickGoldenGirl(0)).toBe('This Golden Girl has been taken');
+  });
+
+
   test('should place user selected golden girl name in character.taken array', () => {
+    character.taken = []
     character.pickGoldenGirl(0);
     expect(character.taken).toEqual(["Blanche Devereaux"]);
-    console.log(character.taken);
   });
 
-  test('should check this.taken to make sure the user selected golden girl hasnt already been selected', () => {
-    character.pickGoldenGirl(0);
-    var blanche = { id: 0, name: "Blanche Devereaux", hp: 65, armor: 35, magic: 10, img: '' }
+  test('pick golden girl for player2',() => {
+    character.turnCount = 2;
+    character.pickGoldenGirl(1);
+    var sophia = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 35, magic: 10, img: '' }
+    expect(character.user2).toEqual(sophia);
+  })
 
-  });
+
 
 })
