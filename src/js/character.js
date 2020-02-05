@@ -57,12 +57,18 @@ export class Character {
     };
 
     getUser(){
-        //check turn count
-        // do math to find current user
-        //return user
+        if(this.turnCount % 2 === 0){
+            return 'user2';
+        }
+        else if (this.turnCount % 2 !== 0) {
+            return 'user1';
+        }
+        else {
+            "error"
+        }
     };
 
     advanceTurn(){
-        // add one to turn;
+        return this.turnCount +=1;
     }; 
 };
