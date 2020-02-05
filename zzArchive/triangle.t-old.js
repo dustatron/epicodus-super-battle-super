@@ -1,4 +1,5 @@
-import { Triangle } from './../src/triangle.js';
+import { Triangle } from '../../src/js/triangle.js';
+import { exportAllDeclaration } from '@babel/types';
 
 describe('Triangle', () => {
 	test('should correctly determine if three length are an equilateral triangle', () => {
