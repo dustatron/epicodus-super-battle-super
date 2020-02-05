@@ -1,20 +1,14 @@
-# _Boilerplate Website_
+# _Super Battle Game_
 
-#### _This site comes with the all basic parts to get you started making a single page website fast. | Jan 24. 2020_
+#### _This is a RPG that will allow a person to battle their inner child. | Feb 5th. 2020_
 
-#### By _**Dusty McCord**_
+#### By _**Alex Skreen & Dusty McCord**_
 [link to demo site coming](#)
 
 ## Description
 
-_This boilerplate site has one index.html file that is already linked to the included bootstrap.css(4.4), styles.css, jQuery.js(3.4.1), and scripts.js._
-
-
-There is a pre-built two input form with a submit button. There is also a simple jQuery function that will console.log when the submit button is clicked.
-
-The .gitignore file is a template for mac osx but a link is provided to get a template for any operating system. 
-
-[create a .gitignore template for your os here](https://www.gitignore.io/)
+This was a Epicodus class project. It is an RPG that allows a user to create a character and battle another character. 
+It uses webpack and Jest testing. 
 
 ## Setup/Installation Requirements
 
@@ -50,13 +44,20 @@ git clone Link-Here
 ### Behavior Driven Development Spec List
 
 Behavoir | Input | Output
-:---------:|:------:|:------:
-The program takes in input and console.log a 'click' | 'any word' | 'click'
-The program takes in any words and console logs the output | 'learning to code' | 'learning to code'
+:---------|:------:|:------:
+|1 - The program allows a user to choose a Golden girl and will return a golden girl character | Pick Rose | Rose with standard properties. |
+|2 - The program will allow a user to allocate points to armor and health based on a total of 100 points. | 70 to HP, 30 to Armor | 70 to HP, 30 to Armor |
+|3 - The program will allow user 2 to select a character and allocate points. | Rose  + points | Rose + points |
+|4 - The program will allow user 1 to start their turn by drawing from inventory or holding current inventory | Draw | randomly selected new item |
+|5 - The program will allow user 1 to nap or attack | attack | attack user 2 |
+|6 - The program will allow a user to win or lose an attack based off of an advanced algorithm | Roll Dice | Win |
+|7 - If the user wins the HP score of the attacker will go down by 5 and the loser will go down by the attack total | attack 80 | User 1 (HP - 5), User 2 (HP - 80) |
+|8 - The program will allow user 2 to draw or hold | hold | hold |
+|9 - The program will allow user 2 to nap or attack. If nap the user heals |  nap | heal 5 HP |
 
 ## Support 
 
-_The software is provided as is. It might work as expected - or not. Just don't blame me._
+_The software is provided as is. It might work as expected - or not. Use at your own risk._
 
 
 ## Built With
@@ -70,6 +71,7 @@ _The software is provided as is. It might work as expected - or not. Just don't 
 * [ESLint](https://eslint.org/)
 * [Node.js](https://nodejs.org/en/)
 * [Uglifyjs](https://www.uglifyjs.net/)
+* [Jest](https://jestjs.io/)
 
 ## Useful tools
 
