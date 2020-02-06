@@ -29,3 +29,23 @@
 .turn-alert {
   display: none;
 }
+
+.fail {
+  margin-top: 24px;
+  display: none;
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  text-align: center;
+}
+
+.turn-alert {
+  margin-top: 25px;
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}

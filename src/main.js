@@ -35,6 +35,7 @@ $(document).ready(function() {
     $(".draw-hold").slideUp();
     $(".attack-hold").slideDown();
     present();
+    drawPresent();
   });
 
   $(".attack-hold").on("click", "button", function() {
@@ -46,11 +47,34 @@ $(document).ready(function() {
     turnalert();
   });
 
+  function drawPresent() {
+    $(".fail ").fadeOut();
+    $(".turn-alert").fadeOut();
+  }
+
   function turnalert() {
-    $("#active-user").html(character.user1.name);
-    $("#inactive-user").html(character.user2.name);
-    $("#attack-hp").html(battle.dice6);
-    $(".turn-alert").fadeIn();
+    let attacker;
+    let target;
+    if (character.getUser() === "user1") {
+      attacker = character.user1.name;
+      target = character.user2.name;
+    } else {
+      attacker = character.user2.name;
+      target = character.user1.name;
+    }
+    if (battle.state === "hit") {
+      $(".fail ").fadeOut();
+      $(".turn-alert").fadeIn();
+
+      $("#active-user").html(attacker);
+      $("#inactive-user").html(target);
+      $("#attack-hp").html(battle.dice6);
+    } else if (battle.state === "miss") {
+      //   $(".fail ").html(battle.state);
+      $("#this-player").html(attacker);
+      $(".turn-alert").hide();
+      $(".fail ").fadeIn();
+    }
   }
 
   function present() {
