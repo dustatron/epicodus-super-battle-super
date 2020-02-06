@@ -22,7 +22,7 @@ describe("update inventory", () => {
   });
 
   test("should return user1s health increased by 5 hp", () => {
-    character.user1 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 35, magic: 10, img: "" };
+    character.user1 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 35, state: "alive", magic: 10, img: "" };
     battle.updateInventory("hold");
     expect(character.user1.hp).toEqual(70);
   });
@@ -79,7 +79,7 @@ describe("run attack", () => {
   });
 
   test("should return user1s health increased by 10 hp", () => {
-    character.user1 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 35, magic: 10, img: "" };
+    character.user1 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 12, state: "alive", magic: 10, img: "" };
     battle.runAttack("hold");
     expect(character.user1.hp).toEqual(75);
   });
@@ -91,8 +91,14 @@ describe("run attack", () => {
   });
 
   // ---------- CHOOSE ATTACK
-  test("should return attack", () => {
-    expect(battle.runAttack("attack")).toEqual("attack");
+  character.user1 = { id: 1, name: "Sophia Petrillo", hp: 35, armor: 12, state: "alive", magic: 10, img: "" };
+  character.user2 = { id: 1, name: "Rose", hp: 35, armor: 12, state: "alive", magic: 10, img: "" };
+  test("should return attack when roll is more than armor", () => {
+    expect(battle.runAttack("attack", 20, 6)).toEqual("attack");
+  });
+
+  test("should return miss when roll is less then armor", () => {
+    expect(battle.runAttack("attack", 10, 6)).toEqual("miss");
   });
 });
 
@@ -125,15 +131,33 @@ describe("is hit", () => {
     expect(battle.isHit(6)).toEqual(6);
   });
   test("should reduce user2s hp by 6", () => {
-    character.user2 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 12, magic: 10, img: "" };
+    character.user2 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 12, state: "alive", magic: 10, img: "" };
     character.turnCount = 1;
     battle.isHit(6);
     expect(character.user2.hp).toEqual(59);
   });
   test("should reduce user1s hp by 6", () => {
-    character.user1 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 12, magic: 10, img: "" };
+    character.user1 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 12, state: "alive", magic: 10, img: "" };
     character.turnCount = 2;
     battle.isHit(6);
     expect(character.user1.hp).toEqual(59);
+  });
+});
+
+describe("check for death", () => {
+  const character = new Character();
+  const battle = new Battle(character);
+
+  test("should user1 state equals death", () => {
+    character.user1 = { id: 1, name: "Sophia Petrillo", hp: 0, armor: 12, state: "alive", magic: 10, img: "" };
+    battle.checkForDeath();
+    expect(character.user1.state).toEqual("dead");
+  });
+
+  test("should user2 state equals death", () => {
+    character.user1 = { id: 1, name: "Sophia Petrillo", hp: 1, armor: 12, state: "alive", magic: 10, img: "" };
+    character.user2 = { id: 1, name: "Sophia Petrillo", hp: 0, armor: 12, state: "alive", magic: 10, img: "" };
+    battle.checkForDeath();
+    expect(character.user2.state).toEqual("dead");
   });
 });

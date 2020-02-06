@@ -119,4 +119,15 @@ export class Battle {
       return "fail";
     }
   }
+
+  checkForDeath() {
+    let that = this;
+    if (that.character.user1.hp <= 0) {
+      that.character.user1.state = "dead";
+      return "User 1 is Dead";
+    } else if (that.character.user2.hp <= 0) {
+      that.character.user2.state = "dead";
+      return "User 2 is Dead";
+    }
+  }
 }

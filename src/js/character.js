@@ -11,32 +11,36 @@ export class Character {
       {
         id: 0,
         name: "Blanche Devereaux",
-        hp: 65,
-        armor: 35,
+        hp: 35,
+        armor: 12,
         magic: 10,
+        state: "alive",
         img: ""
       },
       {
         id: 1,
         name: "Sophia Petrillo",
-        hp: 65,
-        armor: 35,
+        hp: 35,
+        armor: 12,
+        state: "alive",
         magic: 10,
         img: ""
       },
       {
         id: 2,
         name: "Dorothy Zbornak",
-        hp: 65,
-        armor: 35,
+        hp: 35,
+        armor: 12,
+        state: "alive",
         magic: 10,
         img: ""
       },
       {
         id: 3,
         name: "Rose Nylund",
-        hp: 65,
-        armor: 35,
+        hp: 35,
+        armor: 12,
+        state: "alive",
         magic: 10,
         img: ""
       }
