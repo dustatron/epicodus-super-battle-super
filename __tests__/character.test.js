@@ -35,7 +35,15 @@ describe("pick golden girl", () => {
 
   test("should place blanche object in charater.user1", () => {
     character.pickGoldenGirl(0);
-    var blanche = { id: 0, name: "Blanche Devereaux", hp: 35, armor: 12, state: "alive", magic: 10, img: "" };
+    var blanche = {
+      id: 0,
+      name: "Blanche Devereaux",
+      hp: 35,
+      armor: 12,
+      state: "alive",
+      magic: 10,
+      img: "https://i.pinimg.com/originals/bd/1e/54/bd1e5420b9645d2fed100c82922c6466.jpg"
+    };
     expect(character.user1).toEqual(blanche);
   });
 
@@ -53,7 +61,16 @@ describe("pick golden girl", () => {
   test("pick golden girl for player2", () => {
     character.turnCount = 2;
     character.pickGoldenGirl(1);
-    var sophia = { id: 1, name: "Sophia Petrillo", hp: 35, armor: 12, state: "alive", magic: 10, img: "" };
+    var sophia = {
+      id: 1,
+      name: "Sophia Petrillo",
+      hp: 35,
+      armor: 12,
+      state: "alive",
+      magic: 10,
+      img:
+        "https://vignette.wikia.nocookie.net/goldengirls/images/9/9e/Sophia1.jpg/revision/latest/top-crop/width/360/height/450?cb=20100305000442"
+    };
     expect(character.user2).toEqual(sophia);
   });
 });

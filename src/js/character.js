@@ -15,7 +15,7 @@ export class Character {
         armor: 12,
         magic: 10,
         state: "alive",
-        img: ""
+        img: "https://i.pinimg.com/originals/bd/1e/54/bd1e5420b9645d2fed100c82922c6466.jpg"
       },
       {
         id: 1,
@@ -24,7 +24,8 @@ export class Character {
         armor: 12,
         state: "alive",
         magic: 10,
-        img: ""
+        img:
+          "https://vignette.wikia.nocookie.net/goldengirls/images/9/9e/Sophia1.jpg/revision/latest/top-crop/width/360/height/450?cb=20100305000442"
       },
       {
         id: 2,
@@ -33,7 +34,8 @@ export class Character {
         armor: 12,
         state: "alive",
         magic: 10,
-        img: ""
+        img:
+          "https://vignette.wikia.nocookie.net/goldengirls/images/4/4e/Beaarthur_%281%29.jpg/revision/latest/top-crop/width/360/height/450?cb=20101208103602"
       },
       {
         id: 3,
@@ -42,15 +44,9 @@ export class Character {
         armor: 12,
         state: "alive",
         magic: 10,
-        img: ""
+        img: "https://i.pinimg.com/236x/7a/5d/fe/7a5dfecd125de749c030e14bc59dc00e--the-golden-girls-golden-age.jpg"
       }
     ];
-
-    //check that golden girl is not taken
-    //run getUser save to let
-    //add golden girl object to currentUser object.
-    //add golden girl to taken array.
-    //run advanceTurn()
 
     let that = this;
     if (this.taken.includes(listOfGirls[userPick].name)) {
