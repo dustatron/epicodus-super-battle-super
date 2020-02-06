@@ -4,10 +4,9 @@ export class Character {
     this.user2 = {};
     this.taken = [];
     this.turnCount = 1;
-  };
+  }
 
   pickGoldenGirl(userPick) {
-
     const listOfGirls = [
       {
         id: 0,
@@ -15,8 +14,7 @@ export class Character {
         hp: 65,
         armor: 35,
         magic: 10,
-        img: ''
-
+        img: ""
       },
       {
         id: 1,
@@ -24,8 +22,7 @@ export class Character {
         hp: 65,
         armor: 35,
         magic: 10,
-        img: ''
-
+        img: ""
       },
       {
         id: 2,
@@ -33,8 +30,7 @@ export class Character {
         hp: 65,
         armor: 35,
         magic: 10,
-        img: ''
-
+        img: ""
       },
       {
         id: 3,
@@ -42,9 +38,8 @@ export class Character {
         hp: 65,
         armor: 35,
         magic: 10,
-        img: ''
-
-      },
+        img: ""
+      }
     ];
 
     //check that golden girl is not taken
@@ -55,35 +50,32 @@ export class Character {
 
     let that = this;
     if (this.taken.includes(listOfGirls[userPick].name)) {
-      return "This Golden Girl has been taken"
+      return "This Golden Girl has been taken";
     } else {
-      if(that.getUser() === 'user1'){
+      if (that.getUser() === "user1") {
         that.taken.push(listOfGirls[userPick].name);
         that.user1 = listOfGirls[userPick];
-      } else if (that.getUser() === 'user2') {
+      } else if (that.getUser() === "user2") {
         that.user2 = listOfGirls[userPick];
         that.taken.push(listOfGirls[userPick].name);
       } else {
-        return 'Error: on writing to user object';
+        return "Error: on writing to user object";
       }
       that.advanceTurn();
     }
-
-  };
+  }
 
   getUser() {
     if (this.turnCount % 2 === 0) {
-      return 'user2';
+      return "user2";
+    } else if (this.turnCount % 2 !== 0) {
+      return "user1";
+    } else {
+      ("error");
     }
-    else if (this.turnCount % 2 !== 0) {
-      return 'user1';
-    }
-    else {
-      "error"
-    }
-  };
+  }
 
   advanceTurn() {
-    return this.turnCount += 1;
-  };
-};
+    return (this.turnCount += 1);
+  }
+}
