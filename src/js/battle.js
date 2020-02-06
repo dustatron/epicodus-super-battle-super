@@ -8,19 +8,23 @@ export class Battle {
 
     updateInventory(action, testItem){
         let that = this;
+        let timesByAmount = this.inventory.items.length;
+        let newItem; 
+
         if (action === "hold") {
             that.character.user1.hp +=5;
             return "hold"
         } else if (action === "draw"){
+            //for testing of random number
             if(testItem){
-                that.inventory.items[testItem].id = that.character.getUser();
-                return that.inventory.items[testItem].id;
+               newItem = writeToFreeItem(testItem);
+            } else {
+                newItem = writeToFreeItem(Math.floor(Math.random() * timesByAmount));
             }
         } else {
             return "Error on draw"
         }
-        //check action.
-        //if hold do nothing
+
         //else grab random item and take away old item
         //add user to inventory item and/or remove from item.
     };
@@ -36,6 +40,26 @@ export class Battle {
         //advanceTurn()
     }
 
+    writeToFreeItem(index){
+        let that = this;
+        if(this.inventory.items[index].id === 'none') {
+            that.inventory.items[index].id = that.character.getUser();
+            return that.inventory.items[index].id;
+        } else {
+            // let newIndex = index + 1;
+            // writeToFreeItem(newIndex);
 
+            return 'Item has user';
+        }
+    }
+
+    dropItems(newItem){
+        for (let i = 0; i < this.inventory.items.length; i++) {
+            let item = this.inventory.items[i];
+            if (item.id === newItem.id && item.name !== newItem.name) {
+                item.id = "none";
+            }
+        }
+    }
 
 }
