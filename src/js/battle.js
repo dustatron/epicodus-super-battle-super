@@ -27,7 +27,7 @@ export class Battle {
     }
   }
 
-  runAttack(action) {
+  runAttack(action, testDice20, testDice6) {
     let that = this;
 
     if (action === "hold") {
@@ -35,13 +35,40 @@ export class Battle {
       this.character.advanceTurn();
       return "hold";
     } else if (action === "attack") {
+      //get armor for the target user
+      let armor;
+      if (that.character.getUser() === "user1") {
+        armor = that.character.user2.armor;
+      } else {
+        armor = that.character.user1.armor;
+      }
+
+      if (testDice20) {
+        //run test attack
+        if (that.hitOrMiss(testDice20, armor)) {
+          that.isHit(testDice6);
+          this.character.advanceTurn();
+        } else {
+          return "miss";
+        }
+        return "attack";
+      }
+    } else {
+      let armor;
+      if (that.character.getUser() === "user1") {
+        armor = that.character.user2.armor;
+      } else {
+        armor = that.character.user1.armor;
+      }
+      //run attack with random numbers
+      if (that.hitOrMiss(that.rollDice(20), armor)) {
+        that.isHit(that.rollDice(6));
+        this.character.advanceTurn();
+      } else {
+        return "miss";
+      }
       return "attack";
     }
-    //advanceTurn()
-    //if attack is 'attack' do math.
-    //update user totals.
-    //check user is still alive.
-    //advanceTurn()
   }
 
   writeToFreeItem(index) {
@@ -70,19 +97,19 @@ export class Battle {
     return Math.ceil(Math.random() * size);
   }
 
-  hitOrMiss(roll, target) {
-    const armor = target.armor;
+  hitOrMiss(roll, armor) {
     if (armor >= roll) {
       return false;
     } else if (armor <= roll) {
       return true;
+    } else {
+      return "hit or miss error";
     }
   }
 
   isHit(roll) {
     let that = this;
     if (that.character.getUser() === "user1") {
-      console.log(that.character.user2.hp);
       that.character.user2.hp -= roll;
       return roll;
     } else if (that.character.getUser() === "user2") {

@@ -109,13 +109,11 @@ describe("hit or miss", () => {
   const battle = new Battle(character, inventory);
 
   test("should return miss", () => {
-    character.user2 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 12, magic: 10, img: "" };
-    expect(battle.hitOrMiss(10, character.user2)).toEqual(false);
+    expect(battle.hitOrMiss(10, 12)).toEqual(false);
   });
 
   test("should return hit", () => {
-    character.user2 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 12, magic: 10, img: "" };
-    expect(battle.hitOrMiss(20, character.user2)).toEqual(true);
+    expect(battle.hitOrMiss(20, 12)).toEqual(true);
   });
 });
 
