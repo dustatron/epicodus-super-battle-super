@@ -10,7 +10,7 @@
         <div class="col-md-6 offset-md-3 box-decore">
           <h1 class="text-center">Super Battle Game</h1>
           <div class="current-turn">
-            <h4 class="text-center">It is <span id="current-user-name">Roses turn</span></h4>
+            <h4 id="turn-name" class="text-center">It is <span id="current-user-name"></span>'s turn!</h4>
           </div>
         </div>
       </div>
@@ -35,24 +35,31 @@
         </div>
       </div>
 
+      <div class="row text-center">
+        <button id="start" class="btn btn-lg btn-success">Start</button>
+      </div>
+
   
       <!-- output box  -->
       <div class="battle-board">
 
         <div class="row ">
           <div class="col-md-4">
-              <h3 id="user2-title">Rose</h3>
-              <img id="user2-img" src="http://unsplash.it/200/300" alt="">
+              <h3 id="user1-title">Rose</h3>
+              <img id="user1-img" src="http://unsplash.it/200/300" alt="">
           </div>
           <div class="col-md-4">
+            <h3 class="text-center">VS</h3>
             <div class="draw-hold">
-              <h3 class="text-center">VS</h3>
-              <button class="btn btn-success btn-block">Draw</button>
-              <button class="btn btn-warning btn-block">Hold</button>
+              <button name="draw" class="btn btn-success btn-block">Draw</button>
+              <button name="hold" class="btn btn-warning btn-block">Hold</button>
             </div>
             <div class="attack-hold">
-              <button class="btn btn-danger btn-block">Attack</button>
-              <button class="btn btn-warning btn-block">Hold</button>
+              <button name="attack" class="btn btn-danger btn-block">Attack</button>
+              <button name="hold" class="btn btn-warning btn-block">Hold</button>
+            </div>
+            <div class="turn-alert">
+              <span id="active-user"></span> hit <span id="inactive-user"></span> for <span id="attack-hp"></span> points.
             </div>
           </div>
           <div class="col-md-4">  
@@ -62,10 +69,15 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <h4>User 1 Stats</h4>
+            <h4>HP :<span id="user1-hp">0</span></h4>
+            <h4>Armor :<span id="user1-armor">0</span></h4>
+            <h4>inventory :<span id="user1-inventory">0</span></h4>
+            
           </div>
           <div class="col-md-4 offset-md-4">
-            <h4>User 2 Stats</h4>
+              <h4>HP :<span id="user2-hp">0</span></h4>
+              <h4>Armor :<span id="user2-armor">0</span></h4>
+              <h4>inventory :<span id="user2-inventory">0</span></h4>
           </div>
         </div>
       </div>

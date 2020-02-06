@@ -1,6 +1,8 @@
 export class Battle {
   constructor(character, inventory) {
     this.state = 0;
+    this.dice20 = "";
+    this.dice6 = "";
     this.character = character;
     this.inventory = inventory;
   }
@@ -11,7 +13,11 @@ export class Battle {
     let newItem;
 
     if (action === "hold") {
-      that.character.user1.hp += 5;
+      if (that.character.getUser() === "user1") {
+        that.character.user1.hp += 5;
+      } else {
+        that.character.user2.hp += 5;
+      }
       return "hold";
     } else if (action === "draw") {
       //for testing of random number
@@ -31,7 +37,11 @@ export class Battle {
     let that = this;
 
     if (action === "hold") {
-      that.character.user1.hp += 10;
+      if (that.character.getUser() === "user1") {
+        that.character.user1.hp += 10;
+      } else {
+        that.character.user2.hp += 10;
+      }
       this.character.advanceTurn();
       return "hold";
     } else if (action === "attack") {
@@ -49,25 +59,30 @@ export class Battle {
           that.isHit(testDice6);
           this.character.advanceTurn();
         } else {
+          this.character.advanceTurn();
           return "miss";
         }
         return "attack";
+      } else {
+        let armor;
+        if (that.character.getUser() === "user1") {
+          armor = that.character.user2.armor;
+        } else {
+          armor = that.character.user1.armor;
+        }
+        //run attack with random numbers
+        if (that.hitOrMiss(that.rollDice(20), armor)) {
+          that.state = "hit";
+          that.isHit(that.rollDice(6));
+          this.character.advanceTurn();
+        } else {
+          this.character.advanceTurn();
+          that.state = "miss";
+          return "miss";
+        }
       }
     } else {
-      let armor;
-      if (that.character.getUser() === "user1") {
-        armor = that.character.user2.armor;
-      } else {
-        armor = that.character.user1.armor;
-      }
-      //run attack with random numbers
-      if (that.hitOrMiss(that.rollDice(20), armor)) {
-        that.isHit(that.rollDice(6));
-        this.character.advanceTurn();
-      } else {
-        return "miss";
-      }
-      return "attack";
+      console.log("error run attack");
     }
   }
 
@@ -94,7 +109,14 @@ export class Battle {
   }
 
   rollDice(size) {
-    return Math.ceil(Math.random() * size);
+    let that = this;
+    let diceRoll = Math.ceil(Math.random() * size);
+    if (size === 20) {
+      that.dice20 = diceRoll;
+    } else {
+      that.dice6 = diceRoll;
+    }
+    return diceRoll;
   }
 
   hitOrMiss(roll, armor) {
