@@ -17,16 +17,15 @@ export class Battle {
         } else if (action === "draw"){
             //for testing of random number
             if(testItem){
-               newItem = writeToFreeItem(testItem);
+               newItem = that.writeToFreeItem(testItem);
+               that.dropItems(newItem);
             } else {
-                newItem = writeToFreeItem(Math.floor(Math.random() * timesByAmount));
+                newItem = that.writeToFreeItem(Math.floor(Math.random() * timesByAmount));
+                that.dropItems(newItem);
             }
         } else {
             return "Error on draw"
         }
-
-        //else grab random item and take away old item
-        //add user to inventory item and/or remove from item.
     };
 
     runAttack(action){

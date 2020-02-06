@@ -25,6 +25,17 @@ describe('update inventory', () => {
     battle.updateInventory("hold");
     expect(character.user1.hp).toEqual(70);
   });
+
+  test('should update users item when draw is passed', () => {
+    battle.updateInventory("draw", 1);
+    expect(inventory.items[1].id).toEqual('user1');
+  });
+
+  test('should clear items user had on last turn when draw is passed in', () => {
+    inventory.items[0].id = 'user1';
+    battle.updateInventory("draw", 1);
+    expect(inventory.items[0].id).toEqual('user1');
+  });
 });
 
 describe('write to free item', () => {
