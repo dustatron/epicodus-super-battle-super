@@ -7,15 +7,15 @@ import { Inventory } from "./../src/js/inventory.js";
 
 describe("Battle Object", () => {
   test("should create a new battle object", () => {
-    var battle = new Battle();
+    const battle = new Battle();
     expect(battle).toEqual({ state: 0 });
   });
 });
 
 describe("update inventory", () => {
-  var inventory = new Inventory();
-  var character = new Character();
-  var battle = new Battle(character, inventory);
+  const inventory = new Inventory();
+  const character = new Character();
+  const battle = new Battle(character, inventory);
 
   test("should return hold", () => {
     expect(battle.updateInventory("hold")).toEqual("hold");
@@ -40,9 +40,9 @@ describe("update inventory", () => {
 });
 
 describe("write to free item", () => {
-  var inventory = new Inventory();
-  var character = new Character();
-  var battle = new Battle(character, inventory);
+  const inventory = new Inventory();
+  const character = new Character();
+  const battle = new Battle(character, inventory);
 
   test("should add user1 to a random items id in inventory", () => {
     battle.writeToFreeItem(1);
@@ -55,9 +55,9 @@ describe("write to free item", () => {
 });
 
 describe("drop items", () => {
-  var inventory = new Inventory();
-  var character = new Character();
-  var battle = new Battle(character, inventory);
+  const inventory = new Inventory();
+  const character = new Character();
+  const battle = new Battle(character, inventory);
 
   inventory.items[0].id = "user1";
   inventory.items[1].id = "user1";
@@ -70,10 +70,10 @@ describe("drop items", () => {
 });
 
 describe("run attack", () => {
-  var inventory = new Inventory();
-  var character = new Character();
-  var battle = new Battle(character, inventory);
-
+  const inventory = new Inventory();
+  const character = new Character();
+  const battle = new Battle(character, inventory);
+  // ------------- CHOOSE HOLD
   test("should return hold", () => {
     expect(battle.runAttack("hold")).toEqual("hold");
   });
@@ -82,5 +82,60 @@ describe("run attack", () => {
     character.user1 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 35, magic: 10, img: "" };
     battle.runAttack("hold");
     expect(character.user1.hp).toEqual(75);
+  });
+
+  test("should advance turn when argument is hold", () => {
+    character.turnCount = 1;
+    battle.runAttack("hold");
+    expect(character.turnCount).toEqual(2);
+  });
+
+  // ---------- CHOOSE ATTACK
+  test("should return attack", () => {
+    expect(battle.runAttack("attack")).toEqual("attack");
+  });
+});
+
+describe("roll dice", () => {
+  const battle = new Battle();
+
+  expect(battle.rollDice(6)).toBeGreaterThan(0);
+  expect(battle.rollDice(6)).toBeLessThan(7);
+});
+
+describe("hit or miss", () => {
+  const inventory = new Inventory();
+  const character = new Character();
+  const battle = new Battle(character, inventory);
+
+  test("should return miss", () => {
+    character.user2 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 12, magic: 10, img: "" };
+    expect(battle.hitOrMiss(10, character.user2)).toEqual(false);
+  });
+
+  test("should return hit", () => {
+    character.user2 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 12, magic: 10, img: "" };
+    expect(battle.hitOrMiss(20, character.user2)).toEqual(true);
+  });
+});
+
+describe("is hit", () => {
+  const character = new Character();
+  const battle = new Battle(character);
+
+  test("should return a hit equal to a six sided dice roll", () => {
+    expect(battle.isHit(6)).toEqual(6);
+  });
+  test("should reduce user2s hp by 6", () => {
+    character.user2 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 12, magic: 10, img: "" };
+    character.turnCount = 1;
+    battle.isHit(6);
+    expect(character.user2.hp).toEqual(59);
+  });
+  test("should reduce user1s hp by 6", () => {
+    character.user1 = { id: 1, name: "Sophia Petrillo", hp: 65, armor: 12, magic: 10, img: "" };
+    character.turnCount = 2;
+    battle.isHit(6);
+    expect(character.user1.hp).toEqual(59);
   });
 });

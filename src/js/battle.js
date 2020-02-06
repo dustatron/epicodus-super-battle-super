@@ -32,10 +32,11 @@ export class Battle {
 
     if (action === "hold") {
       that.character.user1.hp += 10;
+      this.character.advanceTurn();
       return "hold";
+    } else if (action === "attack") {
+      return "attack";
     }
-    //check action.
-    //if is 'hold' add 5 point to HP
     //advanceTurn()
     //if attack is 'attack' do math.
     //update user totals.
@@ -62,6 +63,33 @@ export class Battle {
       if (item.id === newItem.id && item.name !== newItem.name) {
         item.id = "none";
       }
+    }
+  }
+
+  rollDice(size) {
+    return Math.ceil(Math.random() * size);
+  }
+
+  hitOrMiss(roll, target) {
+    const armor = target.armor;
+    if (armor >= roll) {
+      return false;
+    } else if (armor <= roll) {
+      return true;
+    }
+  }
+
+  isHit(roll) {
+    let that = this;
+    if (that.character.getUser() === "user1") {
+      console.log(that.character.user2.hp);
+      that.character.user2.hp -= roll;
+      return roll;
+    } else if (that.character.getUser() === "user2") {
+      that.character.user1.hp -= roll;
+      return roll;
+    } else {
+      return "fail";
     }
   }
 }
